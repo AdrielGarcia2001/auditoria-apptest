@@ -1,0 +1,23 @@
+<?php
+
+use App\Enums\TicketType;
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    public function up(): void
+    {
+        Schema::table('tickets', function (Blueprint $table) {
+            $table->string('type')->default(TicketType::Corrective->value)->after('priority');
+        });
+    }
+
+    public function down(): void
+    {
+        Schema::table('tickets', function (Blueprint $table) {
+            $table->dropColumn('type');
+        });
+    }
+};
